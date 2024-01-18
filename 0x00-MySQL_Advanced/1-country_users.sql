@@ -1,4 +1,5 @@
 -- script that creates a table users
+-- with columns id, email, name, country
 
 CREATE TABLE IF NOT EXISTS users(
     id int NOT NULL PRIMARY KEY AUTO_INCREMENT,
