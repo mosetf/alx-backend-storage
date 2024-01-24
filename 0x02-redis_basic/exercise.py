@@ -66,4 +66,11 @@ class Cache:
         self._redis.mset({key: data})
         return key
 
+    def get(self, key: str, fn: Optional[Callable] = None)\
+            -> Union[str, bytes, int, float]:
+        """Get data from Redis"""
+        data = self._redis.get(key)
+        if fn:
+            data = fn(data)
+        return data
 
