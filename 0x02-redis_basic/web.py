@@ -2,7 +2,6 @@
 """Implementing an expiring web cache and tracker"""
 import requests
 import redis
-import time
 
 
 # Create a Redis client
@@ -25,3 +24,8 @@ def get_page(url: str) -> str:
     redis_client.incr(f"count:{url}")
 
     return response.text
+
+
+if __name__ == "__main__":
+    get_page("http://slowwly.robertomurray.co.uk")
+    
