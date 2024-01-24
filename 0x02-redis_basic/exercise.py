@@ -31,3 +31,4 @@ class Cache:
     def get_int(self, data: bytes) -> int:
         """Convert bytes to int"""
         return int.from_bytes(data, "big")
+        
