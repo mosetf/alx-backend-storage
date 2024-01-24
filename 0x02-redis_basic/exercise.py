@@ -74,3 +74,7 @@ class Cache:
             data = fn(data)
         return data
 
+    def get_str(self, key: str) -> str:
+        """Convert bytes to str"""
+        return self.get(key, str)
+
