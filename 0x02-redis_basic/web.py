@@ -6,23 +6,14 @@ import redis
 
 # Create a Redis client
 redis_client = redis.Redis()
+count = 0
 
 def get_page(url: str) -> str:
     """Gets the HTML content of a particular URL and returns it"""
-    # Check if the URL is already cached
-    cached_content = redis_client.get(url)
-    if cached_content:
-        return cached_content.decode()
-
-    # Make the request to the URL
+    redis_client.set(f"cached:{url}", count)
     response = requests.get(url)
-
-    # Store the content in the cache with an expiration time of 10 seconds
-    redis_client.setex(url, 10, response.text)
-
-    # Track the number of times the URL is accessed
     redis_client.incr(f"count:{url}")
-
+    redis_client.setex(f"cached:{url}", 10, redis_client.get(f"cached:{url}"))
     return response.text
 
 
