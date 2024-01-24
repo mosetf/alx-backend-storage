@@ -17,3 +17,10 @@ class Cache:
         self._redis.set(key, data)
         return key
 
+    def get(self, key: str, fn: object) -> str:
+        """Get data from Redis"""
+        data = self._redis.get(key)
+        if data:
+            return fn(data)
+        return None
+
