@@ -24,3 +24,7 @@ class Cache:
             return fn(data)
         return None
 
+    def get_str(self, data: bytes) -> str:
+        """Convert bytes to string"""
+        return data.decode("utf-8")
+
